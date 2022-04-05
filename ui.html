@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; flex-direction: row; width: 100%">
+      <div style="flex: 1">
+        <canvas id="BNO"></canvas>
+      </div>
+      <div style="flex: 1">
+        <canvas id="BMP"></canvas>
+      </div>
+    </div>
+    <button id="launch">launch</button>
+  </body>
+  <script src="node_modules/axios/dist/axios.min.js"></script>
+  <script src="node_modules/chart.js/dist/chart.js"></script>
+  <script src="ui.js"></script>
+</html>
