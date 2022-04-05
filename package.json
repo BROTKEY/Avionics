@@ -1,0 +1,13 @@
+{
+  "name": "avi",
+  "version": "1.0.0",
+  "description": "avionics adapter",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "chart.js": "^3.7.1"
+  }
+}
