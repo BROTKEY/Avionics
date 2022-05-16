@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 ALLDATA = []
 ALLDATA.append([])
 ALLDATA.append([])
+ALLDATA.append([])
 
 def BMPAdapter():
     global ALLDATA
@@ -20,7 +21,7 @@ def BMPAdapter():
         if len(ALLDATA[0]) > 99:
             ALLDATA[0] = ALLDATA[0][-99:]
 
-def BNOAdapter():
+def BNOAdapterEuler():
     global ALLDATA
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind(("0.0.0.0", 692))
@@ -29,6 +30,16 @@ def BNOAdapter():
         ALLDATA[1].append([str(data, 'UTF-8').split(","), str(datetime.datetime.now())])
         if len(ALLDATA[1]) > 99:
             ALLDATA[1] = ALLDATA[1][-99:]
+
+def BNOAdapterAccel():
+    global ALLDATA
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind(("0.0.0.0", 693))
+    while True:
+        data, addr = sock.recvfrom(1024)
+        ALLDATA[2].append([str(data, 'UTF-8').split(","), str(datetime.datetime.now())])
+        if len(ALLDATA[2]) > 99:
+            ALLDATA[2] = ALLDATA[2][-99:]
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -49,7 +60,9 @@ def launch():
 if __name__ == "__main__":
     thread = threading.Thread(target=BMPAdapter)
     thread.start()
-    thread = threading.Thread(target=BNOAdapter)
+    thread = threading.Thread(target=BNOAdapterEuler)
+    thread.start()
+    thread = threading.Thread(target=BNOAdapterAccel)
     thread.start()
     
     app.run()
